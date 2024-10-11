@@ -55,4 +55,4 @@ class Cart:
             self.remove_product(product)
             return "Success!"
         else:
-            raise ValueError("Not enough the products in the shop")
+            raise ValueError("Not enough products in the shop")
