@@ -45,14 +45,14 @@ class TestCart:
         Например, негативные тесты, ожидающие ошибку (используйте pytest.raises, чтобы проверить это)
     """
     
-    def test_add_products(self, product, new_cart):
+    def test_cart_add_products(self, product, new_cart):
         cart.add_product(product, 2)
         assert cart.products[product] == 2
         
         cart.add_product(product, 2)
         assert cart.products[product] == 4
     
-    def test_remove_product(self, product, new_cart):
+    def test_cart_remove_product(self, product, new_cart):
         new_cart(product, 5)
         cart.remove_product(product, 10)
         assert cart.products == {}
@@ -64,21 +64,21 @@ class TestCart:
         cart.remove_product(product)
         assert cart.products == {}
     
-    def test_clear_cart(self, product, new_cart):
+    def test_cart_clear_cart(self, product, new_cart):
         new_cart(product, 5)
         cart.clear()
         assert cart.products == {}
     
-    def test_get_total_price(self, product, new_cart):
+    def test_cart_get_total_price(self, product, new_cart):
         new_cart(product, 5)
         assert cart.get_total_price(product) == 500.0
     
-    def test_success_buy(self, product, new_cart):
+    def test_cart_success_buy(self, product, new_cart):
         new_cart(product, 800)
         assert cart.buy(product) == "Success!"
         assert product.quantity == 200
     
-    def test_buy_more_products(self, product, new_cart):
+    def test_cart_buy_more_products(self, product, new_cart):
         new_cart(product, 1800)
         with pytest.raises(ValueError) as err:
             cart.buy(product)
