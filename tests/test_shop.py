@@ -14,7 +14,6 @@ class TestProducts:
     
     def test_product_check_quantity(self, product):
         # TODO напишите проверки на метод check_quantity
-        assert product.check_quantity(-1) == "The value must be more than or equal to 0"
         assert product.check_quantity(0) is True
         assert product.check_quantity(999) is True
         assert product.check_quantity(1000) is True

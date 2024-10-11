@@ -18,8 +18,6 @@ class Product:
         """
         if quantity >= 0:
             return self.quantity >= quantity
-        else:
-            return "The value must be more than or equal to 0"
     
     def buy(self, quantity):
         """
