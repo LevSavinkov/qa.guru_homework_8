@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from src.utils.errors_util import ErrorUtil
 
 
 @dataclass
@@ -16,7 +17,9 @@ class Product:
         TODO Верните True если количество продукта больше или равно запрашиваемому
             и False в обратном случае
         """
-        if quantity >= 0:
+        if quantity < 0:
+            ErrorUtil.negative_number_error()
+        else:
             return self.quantity >= quantity
     
     def buy(self, quantity):
@@ -26,12 +29,12 @@ class Product:
             Если продуктов не хватает, то выбросите исключение ValueError
         """
         if quantity < 0:
-            raise ValueError("The value must be more than or equal to 0")
+            ErrorUtil.negative_number_error()
         else:
             if self.check_quantity(quantity):
-                return self.check_quantity(quantity)
+                return self.quantity - quantity
             else:
-                raise ValueError("Not enough products in the shop to buy")
+                ErrorUtil.not_enough_error()
     
     def __hash__(self):
         return hash(self.name + self.description)
