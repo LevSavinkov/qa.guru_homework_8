@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from src.utils.errors_util import ErrorUtil
+
+from src.enums.errors_enums import NEGATIVE_NUMBER_ERROR, NOT_ENOUGH_ERROR
 
 
 @dataclass
@@ -18,7 +19,7 @@ class Product:
             и False в обратном случае
         """
         if quantity < 0:
-            ErrorUtil.negative_number_error()
+            raise ValueError(NEGATIVE_NUMBER_ERROR)
         else:
             return self.quantity >= quantity
     
@@ -29,12 +30,13 @@ class Product:
             Если продуктов не хватает, то выбросите исключение ValueError
         """
         if quantity < 0:
-            ErrorUtil.negative_number_error()
+            raise ValueError(NEGATIVE_NUMBER_ERROR)
         else:
             if self.check_quantity(quantity):
-                return self.quantity - quantity
+                self.quantity -= quantity
+                return self.quantity
             else:
-                ErrorUtil.not_enough_error()
+                raise ValueError(NOT_ENOUGH_ERROR)
     
     def __hash__(self):
         return hash(self.name + self.description)

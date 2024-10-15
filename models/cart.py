@@ -1,5 +1,5 @@
 from models.product import Product
-from src.utils.errors_util import ErrorUtil
+from src.enums.errors_enums import NOT_ENOUGH_ERROR
 
 
 class Cart:
@@ -55,9 +55,9 @@ class Cart:
         В этом случае нужно выбросить исключение ValueError
         """
         for product in self.products:
-            if product.check_quantity(self.products[product]):
-                product.quantity -= self.products[product]
+            if not product.check_quantity(self.products[product]):
+                raise ValueError(NOT_ENOUGH_ERROR)
             else:
-                ErrorUtil.not_enough_error()
+                product.buy(self.products[product])
         self.clear()
         return "Success!"

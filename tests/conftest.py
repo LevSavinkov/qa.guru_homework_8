@@ -9,8 +9,3 @@ def cart():
     yield Cart()
     
     Cart().clear()
-
-
-@pytest.fixture()
-def product():
-    return Product("book", 100, "This is a book", 1000)

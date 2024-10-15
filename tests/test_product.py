@@ -1,6 +1,9 @@
 import pytest
 
 from src.enums.errors_enums import NEGATIVE_NUMBER_ERROR, NOT_ENOUGH_ERROR
+from tests.helpers.products import Products
+
+book = Products().book
 
 
 class TestProducts:
@@ -9,29 +12,33 @@ class TestProducts:
     Например, текущий класс группирует тесты на класс Product
     """
     
-    def test_product_check_quantity(self, product):
+    def test_book_check_quantity(self):
         # TODO напишите проверки на метод check_quantity
-        with pytest.raises(ValueError) as err:
-            product.check_quantity(-1)
-        assert str(err.value) == NEGATIVE_NUMBER_ERROR
-        assert product.check_quantity(0) is True
-        assert product.check_quantity(999) is True
-        assert product.check_quantity(1000) is True
-        assert product.check_quantity(1001) is False
+        assert book.check_quantity(0) is True
+        assert book.check_quantity(999) is True
+        assert book.check_quantity(1000) is True
+        assert book.check_quantity(1001) is False
     
-    def test_product_buy(self, product):
+    def test_book_check_quantity_negative(self):
+        with pytest.raises(ValueError) as err:
+            book.check_quantity(-1)
+        assert str(err.value) == NEGATIVE_NUMBER_ERROR
+    
+    def test_book_buy(self):
         # TODO напишите проверки на метод buy
-        with pytest.raises(ValueError) as err:
-            product.buy(-1)
-        assert str(err.value) == NEGATIVE_NUMBER_ERROR
-        assert product.buy(0) == 1000
-        assert product.buy(500) == 500
-        assert product.buy(1000) == 0
+        assert book.buy(0) == 1000
+        assert book.buy(500) == 500
+        assert book.buy(1000) == 0
     
-    def test_product_buy_more_than_available(self, product):
+    def test_book_buy_negative(self):
+        with pytest.raises(ValueError) as err:
+            book.buy(-1)
+        assert str(err.value) == NEGATIVE_NUMBER_ERROR
+    
+    def test_book_buy_more_than_available(self):
         # TODO напишите проверки на метод buy,
         #  которые ожидают ошибку ValueError при попытке купить больше, чем есть в наличии
         with pytest.raises(ValueError) as err:
-            product.buy(1500)
+            book.buy(1500)
         print(err)
         assert str(err.value) == NOT_ENOUGH_ERROR
