@@ -32,7 +32,6 @@ class TestProducts:
         assert str(err.value) == NEGATIVE_NUMBER_ERROR
     
     def test_book_buy_more_than_available(self, book):
-        print(book.quantity)
         # TODO напишите проверки на метод buy,
         #  которые ожидают ошибку ValueError при попытке купить больше, чем есть в наличии
         with pytest.raises(ValueError) as err:
