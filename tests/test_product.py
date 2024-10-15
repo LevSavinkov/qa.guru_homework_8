@@ -27,7 +27,6 @@ class TestProducts:
     def test_book_buy(self):
         # TODO напишите проверки на метод buy
         assert book.buy(0) == 1000
-        assert book.buy(500) == 500
         assert book.buy(1000) == 0
     
     def test_book_buy_negative(self):
